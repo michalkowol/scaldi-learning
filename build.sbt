@@ -21,4 +21,4 @@ libraryDependencies ++= Seq(
   "org.mockito" % "mockito-all" % "1.9.5" % "test"
 )
 
-libraryDependencies += "com.github.scaldi" %% "scaldi" % "0.2"
+libraryDependencies += "org.scaldi" %% "scaldi" % "0.3"

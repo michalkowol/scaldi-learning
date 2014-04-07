@@ -3,7 +3,6 @@ package pl.learning.scaldi
 import org.scalatest.{Matchers, FlatSpec}
 import org.scalatest.mock.MockitoSugar
 import scaldi.{PropertiesInjector, DynamicModule, Injectable}
-import java.util.ResourceBundle
 
 class ScaldiSpec extends FlatSpec with Matchers with MockitoSugar with Injectable {
 
@@ -15,12 +14,24 @@ class ScaldiSpec extends FlatSpec with Matchers with MockitoSugar with Injectabl
     warrior.attackWithWeapon() should include ("bow")
   }
 
-  it should "create concrete instances of warriors" in {
-    val gimli = inject(new WarriorModule("gimli") :: new TestWeaponModule, manifest[Warrior])
-    gimli.attackWithWeapon() should include ("axe")
+  it should "create concrete instances of Legolas" in {
+    implicit val modules = new WeaponModule :: new DynamicModule {
+      bind [Warrior] to new Legolas(bow = inject [Bow])
+    }
 
-    val boromir = inject(new WarriorModule("boromir") :: new TestWeaponModule, manifest[Warrior])
-    boromir.attackWithWeapon() should not be empty
+    val warrior = inject [Warrior]
+
+    warrior.attackWithWeapon() should include ("bow")
+  }
+
+  it should "create concrete instances of Boromir" in {
+    implicit val modules = new WeaponModule :: new DynamicModule {
+      bind [Warrior] to new Boromir(weapon = inject [Weapon])
+    }
+
+    val warrior = inject [Warrior]
+
+    warrior.attackWithWeapon() should include ("stick")
   }
 
   it should "create Gimli" in {
