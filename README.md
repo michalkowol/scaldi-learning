@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/michalkowol/scaldi-learning.png?label=ready&title=Ready)](https://waffle.io/michalkowol/scaldi-learning)
 scaldi-learning
 ===============
 
