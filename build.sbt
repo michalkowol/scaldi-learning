@@ -12,6 +12,8 @@ Seq(com.github.retronym.SbtOneJar.oneJarSettings: _*)
 
 org.scalastyle.sbt.ScalastylePlugin.Settings
 
+ScoverageSbtPlugin.instrumentSettings
+
 libraryDependencies ++= Seq(
   "com.google.guava" % "guava" % "16.0.1",
   "com.google.code.findbugs" % "jsr305" % "2.0.3",
