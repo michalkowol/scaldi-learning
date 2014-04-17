@@ -14,6 +14,8 @@ org.scalastyle.sbt.ScalastylePlugin.Settings
 
 ScoverageSbtPlugin.instrumentSettings
 
+CoverallsPlugin.coverallsSettings
+
 libraryDependencies ++= Seq(
   "com.google.guava" % "guava" % "16.0.1",
   "com.google.code.findbugs" % "jsr305" % "2.0.3",
