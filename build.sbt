@@ -2,9 +2,11 @@ name := "scaldi-learning"
 
 version := "1.0"
 
-scalaVersion := "2.10.4"
+scalaVersion := "2.11.1"
 
-fork := true
+fork in run := true
+
+incOptions := incOptions.value.withNameHashing(true)
 
 scalacOptions ++= Seq("-unchecked", "-deprecation", "-feature")
 
@@ -12,15 +14,14 @@ Seq(com.github.retronym.SbtOneJar.oneJarSettings: _*)
 
 org.scalastyle.sbt.ScalastylePlugin.Settings
 
-ScoverageSbtPlugin.instrumentSettings
+instrumentSettings
 
 libraryDependencies ++= Seq(
-  "com.google.guava" % "guava" % "16.0.1",
+  "com.google.guava" % "guava" % "17.0",
   "com.google.code.findbugs" % "jsr305" % "2.0.3",
-  "ch.qos.logback" % "logback-classic" % "1.1.1",
-  "com.typesafe" %% "scalalogging-slf4j" % "1.1.0",
-  "org.scalatest" %% "scalatest" % "2.1.3" % "test",
+  "org.scaldi" %% "scaldi" % "0.4",
+  "ch.qos.logback" % "logback-classic" % "1.1.2",
+  "com.typesafe.scala-logging" %% "scala-logging-slf4j" % "2.1.2",
+  "org.scalatest" %% "scalatest" % "2.2.0" % "test",
   "org.mockito" % "mockito-all" % "1.9.5" % "test"
 )
-
-libraryDependencies += "org.scaldi" %% "scaldi" % "0.3"

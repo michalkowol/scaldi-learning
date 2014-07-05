@@ -4,7 +4,7 @@ import org.scalatest.{Matchers, FlatSpec}
 import org.scalatest.mock.MockitoSugar
 import scaldi.{PropertiesInjector, DynamicModule, Injectable}
 
-class ScaldiSpec extends FlatSpec with Matchers with MockitoSugar with Injectable {
+class LOTRScaldiSpec extends FlatSpec with Matchers with MockitoSugar with Injectable {
 
   "A Scaldi depenendency injection" should "create warrior from implicit" in {
     implicit val modules = new WarriorModule("legolas") :: new WeaponModule
@@ -16,7 +16,7 @@ class ScaldiSpec extends FlatSpec with Matchers with MockitoSugar with Injectabl
 
   it should "create concrete instances of Legolas" in {
     implicit val modules = new WeaponModule :: new DynamicModule {
-      bind [Warrior] to new Legolas(bow = inject [Bow])
+      bind [Warrior] to injected [Legolas]
     }
 
     val warrior = inject [Warrior]
@@ -26,7 +26,7 @@ class ScaldiSpec extends FlatSpec with Matchers with MockitoSugar with Injectabl
 
   it should "create concrete instances of Boromir" in {
     implicit val modules = new WeaponModule :: new DynamicModule {
-      bind [Warrior] to new Boromir(weapon = inject [Weapon])
+      bind [Warrior] to injected [Boromir]
     }
 
     val warrior = inject [Warrior]
@@ -44,6 +44,16 @@ class ScaldiSpec extends FlatSpec with Matchers with MockitoSugar with Injectabl
 
   it should "create same Gimlis" in {
     implicit val modules = new GimliAlwaysTheSameModule
+
+    val gimli1 = inject [Warrior]
+    val gimli2 = inject [Warrior]
+
+    gimli1 should be(gimli2)
+    gimli1.attackWithWeapon() should include ("one hand axe")
+  }
+
+  it should "create same Gimlis by new" in {
+    implicit val modules = new GimliAlwaysTheSameByNewModule
 
     val gimli1 = inject [Warrior]
     val gimli2 = inject [Warrior]

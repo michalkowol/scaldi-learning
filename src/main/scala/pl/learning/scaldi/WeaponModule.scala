@@ -3,9 +3,9 @@ package pl.learning.scaldi
 import scaldi.Module
 
 class WeaponModule extends Module {
-  bind [Bow] to new NormalBow
-  bind [Axe] to new TwoHandsAxe
-  bind [Weapon] to new Stick
+  bind [Bow] to injected [NormalBow]
+  bind [Axe] to injected [TwoHandsAxe]
+  bind [Weapon] to injected [Stick]
 }
 
 class TestWeaponModule extends Module {
