@@ -1,6 +1,6 @@
 package pl.learning.scaldi.advanced
 
-import pl.learning.scaldi.{Axe, Gimli, OneHandAxe, Warrior}
+import pl.learning.scaldi.{ Axe, Gimli, Warrior }
 import scaldi.Module
 
 class GimliAlwaysTheSameModule extends Module {
