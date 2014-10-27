@@ -8,10 +8,6 @@ class Sword extends Weapon {
   def attack(): String = "Attack with sword"
 }
 
-class Stick extends Weapon {
-  def attack(): String = "Attack with stick"
-}
-
 trait Axe extends Weapon {
   def swing(): String = "Swing..."
 }

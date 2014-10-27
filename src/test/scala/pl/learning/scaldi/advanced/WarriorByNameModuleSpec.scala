@@ -6,7 +6,7 @@ import scaldi.Injectable
 
 class WarriorByNameModuleSpec extends FlatSpec with Matchers with Injectable {
 
-  "Warrior by name module" should "create Legolas" in {
+  "Warrior by name module" should "return Legolas" in {
     implicit val modules = new WarriorModule("legolas") :: new WeaponModule
 
     val warrior = inject[Warrior]
@@ -15,13 +15,22 @@ class WarriorByNameModuleSpec extends FlatSpec with Matchers with Injectable {
     warrior.attack() should include("Shooting an arrow from bow")
   }
 
-  it should "create warrior Gimli" in {
+  it should "return Gimli" in {
     implicit val modules = new WarriorModule("gimli") :: new WeaponModule
 
     val warrior = inject[Warrior]
 
     warrior.attack() should include("Gimli")
     warrior.attack() should include("Attacking with two hands axe")
+  }
+
+  it should "return Boromir" in {
+    implicit val modules = new WarriorModule("boromir") :: new WeaponModule
+
+    val warrior = inject[Warrior]
+
+    warrior.attack() should include("Boromir")
+    warrior.attack() should include("Attack with sword")
   }
 
   it should "return always the same instance" in {

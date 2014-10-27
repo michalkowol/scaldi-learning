@@ -6,7 +6,7 @@ import scaldi.Injectable
 
 class GimliScaldiSpec  extends FlatSpec with Matchers with Injectable {
 
-  "Gimli Scaldi dependency injection" should "create Gimli" in {
+  "Gimli Scaldi dependency injection" should "return Gimli" in {
     implicit val modules = new WeaponModule :: new GimliAlwaysTheSameModule
 
     val gimli = inject[Warrior]
@@ -15,7 +15,7 @@ class GimliScaldiSpec  extends FlatSpec with Matchers with Injectable {
     gimli.attack() should include("Attacking with two hands axe")
   }
 
-  it should "create same Gimlis" in {
+  it should "return same Gimlis every time" in {
     implicit val modules = new WeaponModule :: new GimliAlwaysTheSameModule
 
     val gimli1 = inject[Warrior]
@@ -24,7 +24,7 @@ class GimliScaldiSpec  extends FlatSpec with Matchers with Injectable {
     gimli1 should be theSameInstanceAs gimli2
   }
 
-  it should "create same Gimlis by new" in {
+  it should "return same Gimlis using new every time" in {
     implicit val modules = new WeaponModule :: new GimliAlwaysTheSameByNewModule
 
     val gimli1 = inject[Warrior]
@@ -33,7 +33,7 @@ class GimliScaldiSpec  extends FlatSpec with Matchers with Injectable {
     gimli1 should be theSameInstanceAs gimli2
   }
 
-  it should "create different Gimlis" in {
+  it should "create different Gimlis every time" in {
     implicit val modules = new WeaponModule :: new GimliAlwaysDiffrentModule
 
     val gimli1 = inject[Warrior]

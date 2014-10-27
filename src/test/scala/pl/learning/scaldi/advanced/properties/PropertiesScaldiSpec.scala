@@ -6,7 +6,7 @@ import scaldi.{ DynamicModule, Injectable, PropertiesInjector }
 
 class PropertiesScaldiSpec extends FlatSpec with Matchers with MockitoSugar with Injectable {
 
-  "A Scaldi dependency injection" should "create user with default username and default password" in {
+  "A Scaldi dependency injection" should "return user with default username and default password" in {
     implicit val modules = new UserModule
 
     val user = inject[User]
@@ -15,7 +15,7 @@ class PropertiesScaldiSpec extends FlatSpec with Matchers with MockitoSugar with
     user.password should be("xxx")
   }
 
-  it should "create user with username and password" in {
+  it should "return user with username and password" in {
     implicit val modules = new UserModule :: new ConfigModule
 
     val user = inject[User]
@@ -24,7 +24,7 @@ class PropertiesScaldiSpec extends FlatSpec with Matchers with MockitoSugar with
     user.password should be("secret")
   }
 
-  it should "create user with username and default password" in {
+  it should "return user with username and default password" in {
     implicit val modules = new UserModule :: new DynamicModule {
       binding identifiedBy 'username to "michal"
     }
@@ -35,7 +35,7 @@ class PropertiesScaldiSpec extends FlatSpec with Matchers with MockitoSugar with
     user.password should be("xxx")
   }
 
-  it should "create user with username and password from properties file" in {
+  it should "return user with username and password from properties file" in {
     val props = getClass().getResourceAsStream("/config.properties")
     implicit val modules = new UserModule :: PropertiesInjector(props)
 
