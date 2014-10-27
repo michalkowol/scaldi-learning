@@ -1,27 +1,37 @@
 package pl.learning.scaldi
 
 import org.scalatest.{ Matchers, FlatSpec }
-import org.scalatest.mock.MockitoSugar
-import scaldi.{ PropertiesInjector, DynamicModule, Injectable }
+import scaldi.{ DynamicModule, Injectable }
 
-class LOTRScaldiSpec extends FlatSpec with Matchers with MockitoSugar with Injectable {
+class LOTRScaldiSpec extends FlatSpec with Matchers with Injectable {
 
-  "A Scaldi depenendency injection" should "create warrior from implicit" in {
-    implicit val modules = new WarriorModule("legolas") :: new WeaponModule
+  "A Scaldi dependency injection" should "create warrior from modules" in {
+    implicit val modules = new LegolasWarriorModule :: new WeaponModule
 
     val warrior = inject[Warrior]
 
-    warrior.attackWithWeapon() should include("bow")
+    warrior.attack() should include("Legolas")
+    warrior.attack() should include("Shooting an arrow from bow")
+  }
+
+  it should "create warrior from modules using Test Weapon Module" in {
+    implicit val modules = new LegolasWarriorModule :: new TestWeaponModule
+
+    val warrior = inject[Warrior]
+
+    warrior.attack() should include("Legolas")
+    warrior.attack() should include("testing bow...")
   }
 
   it should "create concrete instances of Legolas" in {
-    implicit val modules = new WeaponModule :: new DynamicModule {
-      bind[Warrior] to injected[Legolas]
+    implicit val modules = new LegolasWarriorModule :: new DynamicModule {
+      bind[Bow] to injected[LongBow]
     }
 
     val warrior = inject[Warrior]
 
-    warrior.attackWithWeapon() should include("bow")
+    warrior.attack() should include("Legolas")
+    warrior.attack() should include("Shooting an arrow from long bow")
   }
 
   it should "create concrete instances of Boromir" in {
@@ -31,44 +41,7 @@ class LOTRScaldiSpec extends FlatSpec with Matchers with MockitoSugar with Injec
 
     val warrior = inject[Warrior]
 
-    warrior.attackWithWeapon() should include("stick")
-  }
-
-  it should "create Gimli" in {
-    implicit val modules = new GimliAlwaysTheSameModule
-
-    val gimli = inject[Warrior]
-
-    gimli.attackWithWeapon() should include("one hand axe")
-  }
-
-  it should "create same Gimlis" in {
-    implicit val modules = new GimliAlwaysTheSameModule
-
-    val gimli1 = inject[Warrior]
-    val gimli2 = inject[Warrior]
-
-    gimli1 should be(gimli2)
-    gimli1.attackWithWeapon() should include("one hand axe")
-  }
-
-  it should "create same Gimlis by new" in {
-    implicit val modules = new GimliAlwaysTheSameByNewModule
-
-    val gimli1 = inject[Warrior]
-    val gimli2 = inject[Warrior]
-
-    gimli1 should be(gimli2)
-    gimli1.attackWithWeapon() should include("one hand axe")
-  }
-
-  it should "create diffrent Gimlis" in {
-    implicit val modules = new GimliAlwaysDiffrentModule
-
-    val gimli1 = inject[Warrior]
-    val gimli2 = inject[Warrior]
-
-    gimli1 should not be gimli2
-    gimli1.attackWithWeapon() should include("one hand axe")
+    warrior.attack() should include("Boromir")
+    warrior.attack() should include("Attack with stick")
   }
 }

@@ -5,11 +5,11 @@ trait Weapon {
 }
 
 class Sword extends Weapon {
-  override def attack(): String = "Attack with sword"
+  def attack(): String = "Attack with sword"
 }
 
 class Stick extends Weapon {
-  override def attack(): String = "Attack with stick"
+  def attack(): String = "Attack with stick"
 }
 
 trait Axe extends Weapon {
@@ -17,11 +17,11 @@ trait Axe extends Weapon {
 }
 
 class TwoHandsAxe extends Axe {
-  override def attack(): String = "Attacking with two hands axe"
+  def attack(): String = "Attacking with two hands axe"
 }
 
 class OneHandAxe extends Axe {
-  override def attack(): String = "Attacking with one hand axe"
+  def attack(): String = "Attacking with one hand axe"
 }
 
 trait Bow extends Weapon {
@@ -29,10 +29,10 @@ trait Bow extends Weapon {
 }
 
 class LongBow extends Bow {
-  override def attack(): String = "Shooting an arrow from long bow"
+  def attack(): String = "Shooting an arrow from long bow"
 }
 
 class NormalBow extends Bow {
-  override def attack(): String = "Shooting an arrow from bow"
+  def attack(): String = "Shooting an arrow from bow"
 }
 
