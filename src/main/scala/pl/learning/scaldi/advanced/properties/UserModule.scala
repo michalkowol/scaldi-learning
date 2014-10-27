@@ -1,11 +1,6 @@
-package pl.learning.scaldi
+package pl.learning.scaldi.advanced.properties
 
 import scaldi.Module
-
-class ConfigModule extends Module {
-  binding identifiedBy 'username to "michal"
-  binding identifiedBy 'password to "secret"
-}
 
 class UserModule extends Module {
   bind[User] to User(

@@ -1,12 +1,12 @@
-package pl.learning.scaldi
+package pl.learning.scaldi.advanced.properties
 
-import org.scalatest.{ Matchers, FlatSpec }
 import org.scalatest.mock.MockitoSugar
-import scaldi.{ PropertiesInjector, Injectable }
+import org.scalatest.{ FlatSpec, Matchers }
+import scaldi.{ DynamicModule, Injectable, PropertiesInjector }
 
 class PropertiesScaldiSpec extends FlatSpec with Matchers with MockitoSugar with Injectable {
 
-  "A Scaldi depenendency injection" should "create user with defualt username and defualt password" in {
+  "A Scaldi dependency injection" should "create user with default username and default password" in {
     implicit val modules = new UserModule
 
     val user = inject[User]
@@ -22,6 +22,17 @@ class PropertiesScaldiSpec extends FlatSpec with Matchers with MockitoSugar with
 
     user.username should be("michal")
     user.password should be("secret")
+  }
+
+  it should "create user with username and default password" in {
+    implicit val modules = new UserModule :: new DynamicModule {
+      binding identifiedBy 'username to "michal"
+    }
+
+    val user = inject[User]
+
+    user.username should be("michal")
+    user.password should be("xxx")
   }
 
   it should "create user with username and password from properties file" in {
