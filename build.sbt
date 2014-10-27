@@ -16,6 +16,8 @@ org.scalastyle.sbt.ScalastylePlugin.Settings
 
 instrumentSettings
 
+coverallsSettings
+
 defaultScalariformSettings
 
 libraryDependencies ++= Seq(
