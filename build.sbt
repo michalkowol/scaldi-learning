@@ -2,7 +2,7 @@ name := "scaldi-learning"
 
 version := "1.0"
 
-scalaVersion := "2.11.1"
+scalaVersion := "2.11.2"
 
 fork in run := true
 
@@ -16,12 +16,14 @@ org.scalastyle.sbt.ScalastylePlugin.Settings
 
 instrumentSettings
 
+scalariformSettings
+
 libraryDependencies ++= Seq(
-  "com.google.guava" % "guava" % "17.0",
-  "com.google.code.findbugs" % "jsr305" % "2.0.3",
+  "com.google.guava" % "guava" % "18.0",
+  "com.google.code.findbugs" % "jsr305" % "3.0.0",
   "org.scaldi" %% "scaldi" % "0.4",
   "ch.qos.logback" % "logback-classic" % "1.1.2",
   "com.typesafe.scala-logging" %% "scala-logging-slf4j" % "2.1.2",
-  "org.scalatest" %% "scalatest" % "2.2.0" % "test",
-  "org.mockito" % "mockito-all" % "1.9.5" % "test"
+  "org.scalatest" %% "scalatest" % "2.2.2" % "test",
+  "org.mockito" % "mockito-all" % "1.10.8" % "test"
 )

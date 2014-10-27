@@ -4,7 +4,7 @@ trait Weapon {
   def attack(): String
 }
 
-class Sword extends Weapon{
+class Sword extends Weapon {
   override def attack(): String = "Attack with sword"
 }
 
@@ -35,5 +35,4 @@ class LongBow extends Bow {
 class NormalBow extends Bow {
   override def attack(): String = "Shooting an arrow from bow"
 }
-
 

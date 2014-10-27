@@ -10,7 +10,6 @@ class WarriorModule(name: String) extends Module {
     case _ => new Boromir(weapon = inject[Weapon])
   }
 
-  bind [Warrior] toProvider createWarrior
+  bind[Warrior] toProvider createWarrior
 }
-
 
